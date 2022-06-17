@@ -21,7 +21,7 @@ public class Hello {
     private Long id;
     private String word;
     private String lang;
-
+    
     public Long getId() {
         return id;
     }

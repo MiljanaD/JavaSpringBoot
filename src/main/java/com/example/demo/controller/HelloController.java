@@ -2,9 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -20,6 +18,12 @@ public class HelloController {
     @GetMapping(path="hello-rest")
     public String getHelloWorld(){
         return helloService.getHelloWorld();
+    }
+
+    @GetMapping(path="hello")
+    public String findByLang(@RequestParam String lang)
+    {
+        return helloService.findByLang(lang);
     }
 
 }
