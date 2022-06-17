@@ -1,4 +1,4 @@
-package com.example.demo.hello;
+package com.example.demo.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
