@@ -17,6 +17,6 @@ public class HelloService {
 
     public String findByLang(String lang)
     {
-        return helloRepository.findByLang(lang).toString();
+        return helloRepository.findByLang(lang).getWord();
     }
 }

@@ -26,4 +26,10 @@ public class HelloController {
         return helloService.findByLang(lang);
     }
 
+    @GetMapping(path="secure/hello")
+    public String secureHello()
+    {
+        return helloService.getHelloWorld();
+    }
+
 }
