@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,14 @@ import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Objects;
 
 @RestController
 @RequestMapping
 public class HelloController {
 
+    @Value("${spring.profiles.active:Unknown}")
+    private String activeProfile;
     private final HelloService helloService;
 
     @Autowired
@@ -30,12 +34,29 @@ public class HelloController {
 
     @GetMapping(path = "hello-rest")
     public String getHelloWorld() {
-        return helloService.getHelloWorld();
+            return helloService.getHelloWorld();
     }
 
     @GetMapping(path = "hello")
     public String findByLang(@RequestParam String lang) {
         return helloService.findByLang(lang);
+    }
+
+    @GetMapping(path = "hello/profiles")
+    public String findByLangProfile(@RequestParam String lang) throws JsonProcessingException {
+        if(Objects.equals(activeProfile, "db"))
+        {
+            return helloService.findByLang(lang);
+        }
+        else if(Objects.equals(activeProfile, "external"))
+        {
+            return externalHello(lang);
+        }
+        else
+        {
+            return "Hello World";
+        }
+
     }
 
     @GetMapping(path = "secure/hello")
