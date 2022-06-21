@@ -12,7 +12,7 @@ public class WebSecurityConfig  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/hello", "/hello-rest", "/h2/**").permitAll()
+        http.authorizeRequests().antMatchers("/hello", "/hello-rest", "/h2/**", "/external").permitAll()
                 .antMatchers("/secure/hello", "/admin", "/save").authenticated()
                 .and().formLogin()
                 .permitAll()
